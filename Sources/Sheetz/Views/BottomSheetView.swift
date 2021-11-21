@@ -33,7 +33,7 @@ public struct BottomSheetView<Content: View>: View {
                 .bottomSheet(
                     isShown: $isShown,
                     sheetHeight: $sheetHeight,
-                    backGroundColor: Color(UIColor.systemBackground)
+                    backgroundColor: Color(.systemBackground)
                 )
                 .offset(y: dragYOffset)
                 .gesture(
