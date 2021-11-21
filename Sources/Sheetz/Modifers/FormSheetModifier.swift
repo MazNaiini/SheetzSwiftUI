@@ -7,7 +7,7 @@ import SwiftUI
 struct FormSheetModifier: ViewModifier {
     let width: CGFloat
     let backgroundColor: Color
-    var onCloseTapped: () -> Void
+    let onCloseTapped: () -> Void
     @Binding var isShown: Bool
 
     func body(content: Content) -> some View {

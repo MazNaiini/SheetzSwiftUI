@@ -7,7 +7,6 @@ import SwiftUI
 struct BottomSheetModifier: ViewModifier {
     @Binding var isShown: Bool
     @Binding var sheetHeight: CGFloat
-
     let backgroundColor: Color
     
     func body(content: Content) -> some View {

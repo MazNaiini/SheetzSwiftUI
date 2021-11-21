@@ -6,7 +6,7 @@ import SwiftUI
 
 public struct BottomSheetView<Content: View>: View {
     @ViewBuilder let content: Content
-    var onDismissAction: () -> Void
+    let onDismissAction: () -> Void
     
     public init(
         @ViewBuilder _ content: () -> Content,
