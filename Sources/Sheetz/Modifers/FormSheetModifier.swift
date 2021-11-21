@@ -9,7 +9,7 @@ struct FormSheetModifier: ViewModifier {
     let backgroundColor: Color
     var onCloseTapped: () -> Void
     @Binding var isShown: Bool
-        
+
     func body(content: Content) -> some View {
         GeometryReader { geometry in
             HStack {
@@ -59,7 +59,8 @@ extension View {
         isShown: Binding<Bool>,
         onClose: @escaping () -> Void
     ) -> some View {
-        ModifiedContent(content: self,
+        ModifiedContent(
+            content: self,
             modifier: FormSheetModifier(
                 width: width,
                 backgroundColor: backgroundColor,
@@ -72,25 +73,23 @@ extension View {
 
 struct FormSheetModifier_Preview: PreviewProvider {
     static var previews: some View {
-        GeometryReader { geometry in
-            VStack(spacing: 16){
-                Text("LOREM IPSUM")
-                    .font(.headline)
-                Divider()
-                    .padding([.leading, .trailing], 16)
-                ForEach(0..<3) { index in
-                    Text("This item number \(index)")
-                        .padding(.bottom, 8)
-                }
+        VStack(spacing: 16) {
+            Text("LOREM IPSUM")
+                .font(.headline)
+            Divider()
+                .padding([.leading, .trailing], 16)
+            ForEach(0..<3) { index in
+                Text("This item number \(index)")
+                    .padding(.bottom, 8)
             }
-            .formSheet(
-                width: geometry.size.width - 16,
-                backgroundColor: .yellow,
-                isShown: .constant(true),
-                onClose: {}
-            )
-            .background(Color.gray)
-            .edgesIgnoringSafeArea(.all)
         }
+        .formSheet(
+            width: 400 ,
+            backgroundColor: .yellow,
+            isShown: .constant(true),
+            onClose: {}
+        )
+        .background(Color.gray)
+        .edgesIgnoringSafeArea(.all)
     }
 }
