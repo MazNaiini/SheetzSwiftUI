@@ -8,8 +8,8 @@ struct BottomSheetModifier: ViewModifier {
     @Binding var isShown: Bool
     @Binding var sheetHeight: CGFloat
 
-    let backGroundColor: Color
-        
+    let backgroundColor: Color
+    
     func body(content: Content) -> some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
@@ -26,7 +26,7 @@ struct BottomSheetModifier: ViewModifier {
                     content
                 }
                 .padding(.bottom, geometry.safeAreaInsets.bottom)
-                .background(backGroundColor)
+                .background(backgroundColor)
                 .cornerRadius(radius: 25, corners: [.topLeft, .topRight])
             }
             .edgesIgnoringSafeArea(.bottom)
@@ -46,14 +46,14 @@ extension View {
     func bottomSheet(
         isShown: Binding<Bool>,
         sheetHeight: Binding<CGFloat>,
-        backGroundColor: Color
+        backgroundColor: Color
     ) -> some View {
         ModifiedContent(
             content: self,
             modifier: BottomSheetModifier(
                 isShown: isShown,
                 sheetHeight: sheetHeight,
-                backGroundColor: backGroundColor
+                backgroundColor: backgroundColor
             )
         )
     }
@@ -74,7 +74,7 @@ struct BottomSheetViewModifier_Preview: PreviewProvider {
         .bottomSheet(
             isShown: .constant(true),
             sheetHeight: .constant(0),
-            backGroundColor: Color(white: 1)
+            backgroundColor: Color(white: 1)
         )
         .background(Color.gray)
         .edgesIgnoringSafeArea(.top)

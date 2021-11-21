@@ -8,7 +8,7 @@ struct Chrome: View {
     @Binding var chromeAlpha: CGFloat
     
     var body: some View {
-        Color(UIColor.gray)
+        Color(.gray)
             .opacity(chromeAlpha)
             .edgesIgnoringSafeArea(.all)
     }
