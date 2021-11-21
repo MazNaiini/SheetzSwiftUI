@@ -16,7 +16,8 @@ private struct SizeModifier: ViewModifier {
     func body(content: Content) -> some View {
         content.background(
             GeometryReader { geometry in
-                Color.clear
+                Color
+                    .clear
                     .preference(key: SizeKey.self, value: geometry.size)
             }
         )

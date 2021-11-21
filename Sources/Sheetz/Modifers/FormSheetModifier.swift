@@ -6,6 +6,7 @@ import SwiftUI
 
 struct FormSheetModifier: ViewModifier {
     let width: CGFloat
+    let backgroundColor: Color
     var onCloseTapped: () -> Void
     @Binding var isShown: Bool
         
@@ -31,9 +32,9 @@ struct FormSheetModifier: ViewModifier {
             getTopBar(onClose: onCloseTapped)
             content
         }
-        .frame(width: width)
         .padding()
-        .background(Color(white: 1))
+        .frame(width: width)
+        .background(backgroundColor)
         .cornerRadius(20)
     }
     
@@ -44,7 +45,7 @@ struct FormSheetModifier: ViewModifier {
                 onClose()
             } label: {
                 Image(systemName: "xmark")
-                    .foregroundColor(Color(UIColor.white))
+                    .foregroundColor(Color(.black))
                     .font(.system(size: 25))
             }
         }
@@ -52,13 +53,44 @@ struct FormSheetModifier: ViewModifier {
 }
 
 extension View {
-    func formSheet(width: CGFloat, isShown: Binding<Bool>, onClose: @escaping () -> Void) -> some View {
+    func formSheet(
+        width: CGFloat,
+        backgroundColor: Color,
+        isShown: Binding<Bool>,
+        onClose: @escaping () -> Void
+    ) -> some View {
         ModifiedContent(content: self,
             modifier: FormSheetModifier(
                 width: width,
+                backgroundColor: backgroundColor,
                 onCloseTapped: onClose,
                 isShown: isShown
             )
         )
+    }
+}
+
+struct FormSheetModifier_Preview: PreviewProvider {
+    static var previews: some View {
+        GeometryReader { geometry in
+            VStack(spacing: 16){
+                Text("LOREM IPSUM")
+                    .font(.headline)
+                Divider()
+                    .padding([.leading, .trailing], 16)
+                ForEach(0..<3) { index in
+                    Text("This item number \(index)")
+                        .padding(.bottom, 8)
+                }
+            }
+            .formSheet(
+                width: geometry.size.width - 16,
+                backgroundColor: .yellow,
+                isShown: .constant(true),
+                onClose: {}
+            )
+            .background(Color.gray)
+            .edgesIgnoringSafeArea(.all)
+        }
     }
 }

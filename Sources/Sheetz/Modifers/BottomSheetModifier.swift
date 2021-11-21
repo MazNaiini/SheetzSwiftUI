@@ -59,22 +59,16 @@ extension View {
     }
 }
 
-extension GeometryProxy {
-    var totalHeight: CGFloat {
-        size.height + safeAreaInsets.top + safeAreaInsets.bottom
-    }
-}
-
-
 struct BottomSheetViewModifier_Preview: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 16){
-            Text("LOREM IPSUM ")
+            Text("LOREM IPSUM")
                 .font(.headline)
             Divider()
                 .padding([.leading, .trailing], 16)
             ForEach(0..<3) { index in
-                Text("This item number \(index)").padding(.bottom, 8)
+                Text("This item number \(index)")
+                    .padding(.bottom, 8)
             }
         }
         .bottomSheet(
@@ -82,5 +76,7 @@ struct BottomSheetViewModifier_Preview: PreviewProvider {
             sheetHeight: .constant(0),
             backGroundColor: Color(white: 1)
         )
+        .background(Color.gray)
+        .edgesIgnoringSafeArea(.top)
     }
 }
