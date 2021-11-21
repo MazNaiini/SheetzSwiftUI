@@ -101,7 +101,7 @@ public struct FormSheetView<Content: View>: View {
 
 private struct Constants {
     static let chromeAlpha: CGFloat = 0.6
-    static let sheetWidth: CGFloat = 350
+    static let sheetWidth: CGFloat = 450
 }
 
 struct FormSheetView_Previews: PreviewProvider {

@@ -13,27 +13,40 @@ struct FormSheetModifier: ViewModifier {
     func body(content: Content) -> some View {
         GeometryReader { geometry in
             HStack {
-                Spacer()
+                let geometryWidth = geometry.size.width
+                if width <= geometryWidth {
+                    Spacer()
+                }
                 VStack {
                     Spacer()
-                        .frame(height: isShown ? nil: geometry.totalHeight)
-                    getSheetContent(with: content)
+                        .frame(
+                            height: isShown ? nil: geometry.totalHeight
+                        )
+                    getSheetContent(
+                        with: content,
+                        maxWidth: geometry.size.width
+                    )
                     Spacer()
                         .frame(height: isShown ? nil: 0)
                 }
                 .edgesIgnoringSafeArea(.all)
-                Spacer()
+                if width <= geometryWidth {
+                    Spacer()
+                }
             }
         }
     }
     
-    private func getSheetContent(with content: Content) -> some View {
+    private func getSheetContent(
+        with content: Content,
+        maxWidth: CGFloat
+    ) -> some View {
         VStack {
             getTopBar(onClose: onCloseTapped)
             content
         }
         .padding()
-        .frame(width: width)
+        .frame(width: min(width, maxWidth))
         .background(backgroundColor)
         .cornerRadius(20)
     }
@@ -84,7 +97,7 @@ struct FormSheetModifier_Preview: PreviewProvider {
             }
         }
         .formSheet(
-            width: 400 ,
+            width: 400,
             backgroundColor: .yellow,
             isShown: .constant(true),
             onClose: {}
