@@ -5,8 +5,16 @@
 import SwiftUI
 
 public struct BottomSheetView<Content: View>: View {
-    @ViewBuilder public let content: Content
-    public var onDismissAction: () -> Void
+    @ViewBuilder let content: Content
+    var onDismissAction: () -> Void
+    
+    public init(
+        @ViewBuilder _ content: () -> Content,
+        onDismissAction: @escaping () -> Void
+    ) {
+        self.content = content()
+        self.onDismissAction = onDismissAction
+    }
     
     @State private var isShown = false
     @State private var chromeAlpha: CGFloat = 0
