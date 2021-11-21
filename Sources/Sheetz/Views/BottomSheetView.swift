@@ -4,16 +4,16 @@
 
 import SwiftUI
 
-struct BottomSheetView<Content: View>: View {
-    @ViewBuilder let content: Content
-    var onDismissAction: () -> Void
+public struct BottomSheetView<Content: View>: View {
+    @ViewBuilder public let content: Content
+    public var onDismissAction: () -> Void
     
     @State private var isShown = false
     @State private var chromeAlpha: CGFloat = 0
     @State private var dragYOffset: CGFloat = 0
     @State private var sheetHeight: CGFloat = 0
     
-    var body: some View {
+    public var body: some View {
         ZStack {
             Chrome(chromeAlpha: $chromeAlpha)
                 .onTapGesture(
